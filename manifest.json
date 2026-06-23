@@ -1,0 +1,28 @@
+{
+  "name": "CannGuide",
+  "short_name": "CannGuide",
+  "description": "CannGuide — Prozess-Guide, Dosierungsrechner, Chargenverwaltung und Prävention für Cannabis-Edibles. DACH-Raum.",
+  "start_url": "/cannguide/",
+  "scope": "/cannguide/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#111111",
+  "theme_color": "#52b788",
+  "lang": "de",
+  "icons": [
+    {
+      "src": "icon-192.jpg",
+      "sizes": "192x192",
+      "type": "image/jpeg",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icon-512.jpg",
+      "sizes": "512x512",
+      "type": "image/jpeg",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["education", "health", "utilities"],
+  "screenshots": []
+}
