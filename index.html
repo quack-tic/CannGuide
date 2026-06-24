@@ -805,7 +805,7 @@ window.startWizard = function(m) {
   renderWizSteps();
 };
 
-function renderWizSteps() {
+window.renderWizSteps = function() {
   var steps = W[curWizMedia].steps, done = 0;
   for(var i=0;i<steps.length;i++) { if(stepChecked[i]) done++; }
   document.getElementById('pbar').style.width = (steps.length>0 ? (done/steps.length*100).toFixed(0) : 0)+'%';
@@ -929,7 +929,7 @@ function cancelTimerNotif(id) {
 }
 
 // ── LIBRARY ───────────────────────────────────────────────────────────────
-function renderLib() {
+window.renderLib = function() {
   var cats = {loesungsmittel:'Lösungsmittel', tricks:'Profi-Tricks', dekarb:'Dekarboxylierung', fehler:'Troubleshooting', lexikon:'📖 Lexikon'};
   var tabs = '';
   Object.keys(cats).forEach(function(k){
@@ -949,7 +949,7 @@ window.setLibCat = function(k) { activeLibCat=k; renderLib(); };
 window.toggleEntry = function(id) { var el=document.getElementById(id); if(el) el.classList.toggle('open'); };
 
 // ── TERPENE GRID ──────────────────────────────────────────────────────────
-function renderTerpeneGrid() {
+window.renderTerpeneGrid = function() {
   var grid = document.getElementById('terpene-grid'); if(!grid) return;
   grid.innerHTML = TERPENES.map(function(t){
     var sel = selectedTerpenes.indexOf(t.id) !== -1;
@@ -1233,7 +1233,7 @@ window.addAttachments = function(e) {
   e.target.value='';
 };
 
-function renderAttachPreviews(attachments, containerId, editable) {
+window.renderAttachPreviews = function(attachments, containerId, editable) {
   var el = document.getElementById(containerId); if(!el) return;
   if(!attachments||!attachments.length) { el.innerHTML=''; return; }
   el.innerHTML = attachments.map(function(a,i){
@@ -1364,7 +1364,7 @@ window.doCompare = function() {
 };
 
 // Vorlagen
-function renderTemplateSelect() {
+window.renderTemplateSelect = function() {
   var sel = document.getElementById('template-select'); if(!sel) return;
   sel.innerHTML = '<option value="">— Vorlage wählen —</option>'
     +templates.map(function(t,i){return '<option value="'+i+'">'+esc(t.name)+'</option>';}).join('');
@@ -1416,7 +1416,7 @@ function destroyCharts() {
   if(chartPortions){chartPortions.destroy();chartPortions=null;}
 }
 
-function renderCharts() {
+window.renderCharts = function() {
   if(typeof Chart==='undefined') return;
   destroyCharts();
   var acc=getAccent(), txt=getTxt(), grid='rgba(255,255,255,0.05)', bf={family:'system-ui,sans-serif',size:11};
@@ -1459,7 +1459,7 @@ function renderCharts() {
   }
 }
 
-function renderCharges() {
+window.renderCharges = function() {
   var list=document.getElementById('charge-list');
   var dash=document.getElementById('charges-dashboard');
   if(!charges.length) {
@@ -1495,7 +1495,7 @@ function renderCharges() {
 }
 
 // ── SAFETY ────────────────────────────────────────────────────────────────
-function renderSafety() {
+window.renderSafety = function() {
   var cats={dosierung:"Dos &amp; Don'ts",od:'Bei OD / Panik',sucht:'Sucht &amp; Hilfe',anlaufstellen:'Anlaufstellen',recht:'Rechtliches'};
   var tabs='';
   Object.keys(cats).forEach(function(k){
