@@ -23,6 +23,8 @@ h1{font-size:20px;font-weight:600}
 nav{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:1.25rem;border-bottom:1px solid var(--border);padding-bottom:.75rem}
 .nb{background:transparent;border:1px solid var(--border);border-radius:var(--radius);padding:6px 13px;font-size:var(--fs-sm);cursor:pointer;color:var(--text2);transition:all .15s;white-space:nowrap}
 .nb.active{background:var(--bg2);color:var(--text);border-color:var(--border2)}
+#nav-safety,#nav-safety.active{background:#4a1d6e !important;color:#e0aaff !important;border-color:#7b2fc4 !important}
+#nav-safety:hover{background:#5c2485 !important}
 .nb:hover:not(.active){background:var(--bg2)}
 .page{display:none}.page.active{display:block}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px;margin-bottom:1.25rem}
@@ -154,7 +156,7 @@ textarea{resize:vertical;min-height:70px}
   <button class="nb" onclick="showPage('library')" id="nav-library">⊞ Bibliothek</button>
   <button class="nb" onclick="showPage('calc')" id="nav-calc">∑ Rechner</button>
   <button class="nb" onclick="showPage('charges')" id="nav-charges">⊡ Chargen</button>
-  <button class="nb" onclick="showPage('safety')" id="nav-safety">⛨ Prävention</button>
+  <button class="nb" onclick="showPage('safety')" id="nav-safety" style="background:#4a1d6e;color:#e0aaff;border-color:#7b2fc4">⛨ Prävention</button>
 </nav>
 
 <!-- HOME -->
@@ -191,7 +193,7 @@ textarea{resize:vertical;min-height:70px}
   <div style="display:flex;gap:8px;flex-wrap:wrap">
     <button class="btn primary" onclick="showPage('calc')">∑ Dosierungsrechner</button>
     <button class="btn primary" onclick="showPage('charges')">+ Neue Charge</button>
-    <button class="btn" onclick="showPage('safety')" style="border-color:var(--warn);color:var(--warn)">⛨ Prävention</button>
+    <button class="btn" onclick="showPage('safety')" style="background:#4a1d6e;border-color:#7b2fc4;color:#e0aaff">⛨ Prävention</button>
   </div>
   <div class="adv-section">
     <div style="display:flex;align-items:center;gap:8px;margin-bottom:.5rem;flex-wrap:wrap">
