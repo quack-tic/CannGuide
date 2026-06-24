@@ -770,7 +770,7 @@ window.toggleLang = function() {
   applyLang();
 };
 
-function applyLang() {
+window.applyLang = function() {
   var t = I18N[currentLang];
   var setTxt = function(id, txt) { var el=document.getElementById(id); if(el) el.textContent=txt; };
   setTxt('nav-home', '⬡ '+t.start);
@@ -969,7 +969,7 @@ window.toggleTerp = function(id) {
   calcUpdate();
 };
 
-function updateTerpInfo() {
+window.updateTerpInfo = function() {
   var box = document.getElementById('terp-info'); if(!box) return;
   if(!selectedTerpenes.length) { box.style.display='none'; return; }
   var info = selectedTerpenes.map(function(id){
@@ -1123,7 +1123,7 @@ window.saveToCharge = function() {
 };
 
 // ── CHARGEN ───────────────────────────────────────────────────────────────
-function saveChargesStorage() {
+window.saveChargesStorage = function() {
   try { localStorage.setItem('cannguide_charges', JSON.stringify(charges)); } catch(e) {
     var noImg = charges.map(function(c){ return Object.assign({},c,{attachments:[]}); });
     try { localStorage.setItem('cannguide_charges', JSON.stringify(noImg)); } catch(e2) {}
@@ -1410,7 +1410,7 @@ function getAccent(){ return getComputedStyle(document.documentElement).getPrope
 function getTxt(){ return getComputedStyle(document.documentElement).getPropertyValue('--text3').trim(); }
 function getPalette(i){ var p=['#52b788','#4a9eda','#d4a017','#d47ab0','#e05252','#7ec8a0','#a8d8ea','#f4c542']; return p[i%p.length]; }
 
-function destroyCharts() {
+window.destroyCharts = function() {
   if(chartDose){chartDose.destroy();chartDose=null;}
   if(chartMedium){chartMedium.destroy();chartMedium=null;}
   if(chartPortions){chartPortions.destroy();chartPortions=null;}
