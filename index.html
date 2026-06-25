@@ -443,6 +443,7 @@ textarea{resize:vertical;min-height:70px}
         <button class="btn" id="btn-sex-m" onclick="setSex('m')" title="Männlich">♂ Männlich</button>
         <span style="font-size:var(--fs-xs);color:var(--text3);margin-left:4px">Metabolismus beeinflusst Intensität</span>
       </div>
+      <div id="sex-info" style="display:none;margin-top:8px;background:var(--bg3);border:1px solid var(--border2);border-radius:var(--radius);padding:9px 12px;font-size:var(--fs-xs);color:var(--text2);line-height:1.65"></div>
       <div class="input-row" style="margin-top:8px">
         <input type="number" id="bodyweight" placeholder="Körpergewicht (kg)" min="30" max="250" step="1" oninput="calcUpdate()" style="max-width:200px">
         <span class="unit-badge">kg</span>
@@ -462,7 +463,7 @@ textarea{resize:vertical;min-height:70px}
     <div class="rm"><div class="rl">Pro Portion</div><div class="rv hi" id="r-portion">—</div></div>
     <div class="rm" id="r-bio-box" style="display:none"><div class="rl">Bioverfügbar (Ø)</div><div class="rv am" id="r-bio">—</div></div>
     <div class="rm" id="r-tol-box" style="display:none"><div class="rl">Empf. Dosis bei Toleranz</div><div class="rv am" id="r-tol">—</div></div>
-    <div class="rm" id="r-kg-box" style="display:none"><div class="rl">Empf. Startdosis</div><div class="rv am" id="r-kg">—</div></div>
+    <div class="rm" id="r-kg-box" style="display:none"><div class="rl">Empf. Startdosis</div><div class="rv hi" id="r-kg">—</div></div>
     <div class="rm"><div class="rl">Intensität</div><div class="rv" id="r-int">—</div></div>
     <div class="rm"><div class="rl">Empfehlung</div><div class="rv sm" id="r-rec" style="color:var(--text3)">—</div></div>
   </div>
@@ -891,15 +892,34 @@ var I18N = {
     advanced:'⚗ Advanced'
   }
 };
-
 window.setSex = function(s) {
   currentSex = currentSex === s ? null : s;
   var bf = document.getElementById('btn-sex-f');
   var bm = document.getElementById('btn-sex-m');
+  var info = document.getElementById('sex-info');
   if(bf) bf.className = 'btn' + (currentSex==='f' ? ' primary' : '');
   if(bm) bm.className = 'btn' + (currentSex==='m' ? ' primary' : '');
+  if(info) {
+    if(currentSex==='f') {
+      info.style.display='block';
+      info.innerHTML='<b style="color:var(--accent)">♀ Weiblich:</b> Frauen reagieren im Schnitt empfindlicher auf THC. Ursachen: höherer Körperfettanteil (THC ist fettlöslich), hormonelle Einflüsse auf CB1-Rezeptoren sowie ein langsamerer Abbau via CYP2C9. Startdosis-Faktor: <b>−15%</b> gegenüber Referenzwert. Quelle: MacCallum &amp; Russo (2018), Fattore &amp; Fratta (2010).';
+    } else if(currentSex==='m') {
+      info.style.display='block';
+      info.innerHTML='<b style="color:var(--accent)">♂ Männlich:</b> Männer bauen THC tendenziell schneller ab, entwickeln aber rascher Toleranz bei regelmässigem Konsum. Referenzwert ohne Anpassung. Quelle: MacCallum &amp; Russo (2018).';
+    } else {
+      info.style.display='none';
+    }
+  }
   calcUpdate();
 };
+
+
+
+
+
+
+
+
 
 window.toggleLang = function() {
   currentLang = currentLang === 'de' ? 'en' : 'de';
@@ -1160,6 +1180,8 @@ window.calcUpdate = function() {
   var g = parseFloat(document.getElementById('ig').value)||0;
   var bio = parseFloat(document.getElementById('bioavail').value)||0;
   var tolFactor = parseFloat(document.getElementById('tolerance').value)||1.0;
+  var bw = parseFloat(document.getElementById('bodyweight').value) || 0;
+  var sexF = currentSex==='f' ? 0.85 : currentSex==='m' ? 1.0 : 0.92;
   var medName = document.getElementById('cm').options[document.getElementById('cm').selectedIndex].text;
 
   // Bioavailability disclaimer
@@ -1187,7 +1209,16 @@ window.calcUpdate = function() {
   var totPor = pc>0 ? carrier/pc : 0;
   var ratio = (g>0&&carrier>0) ? carrier/g : 0;
   var ppBio = bio>0 ? ppMg*bio : 0;
-  var ppTol = tolFactor>1.0 ? ppMg*tolFactor : 0;
+  var ppTol = 0;
+  if(tolFactor>1.0) {
+    if(bw>0) {
+      var startD = bw * 0.05 * sexF;
+      var cap = startD * 3.5;
+      ppTol = Math.min(startD * tolFactor, cap);
+    } else {
+      ppTol = Math.min(ppMg * 1.3, ppMg + 8);
+    }
+  }
 
   // Validierung
   var errs=[], warns=[];
@@ -1239,14 +1270,12 @@ window.calcUpdate = function() {
   document.getElementById('r-int').innerHTML = tag;
   document.getElementById('r-rec').textContent = rec;
 
-  // mg/kg Körpergewicht
-  var bw = parseFloat(document.getElementById('bodyweight').value) || 0;
   var kgBox = document.getElementById('r-kg-box');
   var kgEl = document.getElementById('r-kg');
   if(bw > 0 && kgBox && kgEl) {
-    var sexFactor = currentSex === 'f' ? 0.85 : currentSex === 'm' ? 1.0 : 0.92;
-    var startDose = Math.round(bw * 0.05 * sexFactor * 10) / 10;
-    var modDose = Math.round(bw * 0.1 * sexFactor * 10) / 10;
+
+    var startDose = Math.round(bw * 0.05 * sexF * 10) / 10;
+    var modDose = Math.round(bw * 0.1 * sexF * 10) / 10;
     kgBox.style.display = 'block';
     kgEl.innerHTML = startDose + ' mg <span style="font-size:11px;color:var(--text3)">(bis ' + modDose + ' mg erfahren)</span>';
   } else if(kgBox) {
