@@ -83,7 +83,7 @@ textarea{resize:vertical;min-height:70px}
 .rg{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:.875rem}
 .rm{background:var(--bg);border:1px solid var(--border);border-radius:var(--radius);padding:.875rem}
 .rl{font-size:var(--fs-xs);color:var(--text3);margin-bottom:5px}
-.rv{font-size:21px;font-weight:600}.rv.hi{color:var(--accent)}.rv.am{color:var(--amber)}
+.rv{font-size:21px;font-weight:600}.rv.hi{color:var(--accent)}.rv.am{color:var(--amber)}.rv.warn{color:var(--warn)}
 .rv.sm{font-size:var(--fs);line-height:1.5;padding-top:2px;font-weight:400}
 .tag{display:inline-block;font-size:var(--fs-xs);padding:2px 8px;border-radius:5px;font-weight:500}
 .tg{background:var(--accent-bg);color:var(--accent)}.ta{background:var(--amber-bg);color:var(--amber)}.tr{background:var(--warn-bg);color:var(--warn)}
@@ -206,6 +206,8 @@ textarea{resize:vertical;min-height:70px}
 .myth-cell p{font-size:var(--fs-sm);line-height:1.5}
 .myth-cell.m p{color:var(--text2)}
 @media(max-width:520px){.ref-grid{grid-template-columns:1fr 1fr}}
+@keyframes pulse-warn{0%,100%{box-shadow:0 0 0 0 rgba(224,82,82,0.4)}50%{box-shadow:0 0 0 6px rgba(224,82,82,0)}}
+.pulse-warn{animation:pulse-warn 1.5s ease-in-out infinite;border-color:var(--warn)!important;}
 </style>
 </head>
 <body>
@@ -1273,7 +1275,9 @@ window.calcUpdate = function() {
     +' · ca. <b style="color:var(--text2)">'+Math.round(totPor)+' Portionen</b>';
 
   document.getElementById('r-total').textContent = Math.round(totMg)+' mg';
-  document.getElementById('r-portion').textContent = ppMg.toFixed(1)+' mg';
+  var portionEl = document.getElementById('r-portion');
+  portionEl.textContent = ppMg.toFixed(1)+' mg';
+  portionEl.className = 'rv' + (ppMg < 10 ? ' hi' : ppMg < 25 ? ' am' : ' warn');
 
   var bioBox=document.getElementById('r-bio-box'), bioEl=document.getElementById('r-bio');
   if(bio>0&&bioBox&&bioEl) { bioBox.style.display='block'; bioEl.textContent=ppBio.toFixed(1)+' mg'; }
@@ -1288,6 +1292,8 @@ window.calcUpdate = function() {
   else if(ppMg<25) { tag='<span class="tag ta">Stark (15–25mg)</span>'; rec='Nur erfahrene Konsumenten!'; }
   else { tag='<span class="tag tr">Sehr stark (&gt;25mg)</span>'; rec='Portionen teilen.'; }
   document.getElementById('r-int').innerHTML = tag;
+  var portionBox = document.getElementById('r-portion').closest('.rm');
+  if(portionBox) portionBox.classList.toggle('pulse-warn', ppMg >= 25);
   document.getElementById('r-rec').textContent = rec;
 
   var kgBox = document.getElementById('r-kg-box');
@@ -1520,7 +1526,7 @@ window.doExportPDF = function() {
     }
     body += '</div>';
   });
-  var html = '<!DOCTYPE html><html lang="de"><head><meta charset="UTF-8"><title>CannGuide</title><style>'+css+'</style></head><body>'
+  var html = '<!DOCTYPE html><html lang="de"><head><meta charset="UTF-8"><title>CannGuide</title><style>'+css+'@keyframes pulse-warn{0%,100%{box-shadow:0 0 0 0 rgba(224,82,82,0.4)}50%{box-shadow:0 0 0 6px rgba(224,82,82,0)}}.pulse-warn{animation:pulse-warn 1.5s ease-in-out infinite;border-color:var(--warn)!important;}</style></head><body>'
     +'<h1>🌿 CannGuide — Chargenübersicht</h1><div class="sub">Exportiert am '+ds+' um '+ts+' · '+charges.length+' Charge(n)</div>'
     +body+'<div class="footer">CannGuide · quack-tic.github.io/cannguide</div></body></html>';
   var win = window.open('','_blank');
