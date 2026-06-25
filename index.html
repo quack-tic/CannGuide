@@ -413,13 +413,14 @@ textarea{resize:vertical;min-height:70px}
     <!-- Applikation / Bioverfügbarkeit -->
     <div class="cr">
       <label class="cl">Applikationsform (Bioverfügbarkeit)</label>
-      <select id="bioavail" onchange="calcUpdate()">
+      <select id="bioavail" onchange="onBioChange()">
         <option value="0">— Nicht berücksichtigen —</option>
         <option value="0.275">Sublingual (Ø 20–35%)</option>
         <option value="0.13">Oral / Edibles (Ø 6–20%)</option>
         <option value="0.03">Topisch (Ø 1–5%)</option>
       </select>
     </div>
+    <div id="bio-appinfo" style="display:none;background:var(--accent-bg);border:1px solid var(--accent);border-radius:var(--radius);padding:9px 12px;font-size:var(--fs-xs);color:#7ec8a0;line-height:1.65;margin-bottom:.875rem"></div>
     <div id="bio-disclaimer" style="display:none;background:var(--amber-bg);border:1px solid var(--amber);border-radius:var(--radius);padding:9px 12px;font-size:var(--fs-xs);color:var(--amber);line-height:1.65;margin-bottom:.875rem">
       ⚠ Bioverfügbarkeitswerte sind Mittelwerte aus klinischen Studien und stellen keine individuellen Prognosen dar. Natürliche Produkte unterliegen inhärenten Schwankungen in Wirkstoffgehalt und -zusammensetzung. Darüber hinaus beeinflussen genetische Veranlagung, Stoffwechselrate, Mageninhalt, Toleranz und Enzymaktivität (insb. CYP2C9/CYP3A4) die tatsächlich bioverfügbare Menge erheblich. Die angezeigten Werte dienen ausschliesslich der groben Orientierung.
     </div>
@@ -1167,6 +1168,25 @@ window.onExtractTypeChange = function() {
   sl.min=cfg.min; sl.max=cfg.max; sl.value=cfg.def;
   document.getElementById('po-ext').textContent = cfg.def;
   document.getElementById('extract-hint').textContent = cfg.hint;
+  calcUpdate();
+};
+
+window.onBioChange = function() {
+  var v = document.getElementById('bioavail').value;
+  var el = document.getElementById('bio-appinfo');
+  if(!el) { calcUpdate(); return; }
+  if(v === '0.13') {
+    el.style.display = 'block';
+    el.innerHTML = '💡 <b>Oral / Edibles:</b> THC wird in der Leber zu 11-Hydroxy-THC (11-OH-THC) umgewandelt — <b>4–5× potenter</b> als Delta-9-THC, überquert die Blut-Hirn-Schranke effizienter. Selbst 6–20% Bioverfügbarkeit kann intensive Wirkung entfalten. Onset: 30–120 Min — <b>niemals nachlegen!</b>';
+  } else if(v === '0.275') {
+    el.style.display = 'block';
+    el.innerHTML = '💡 <b>Sublingual:</b> THC wird direkt über die Mundschleimhaut resorbiert und umgeht den First-Pass-Effekt der Leber. Kein 11-OH-THC — die Wirkung ist direkter und vorhersehbarer als Edibles. Onset: 15–45 Min. Lösung mind. 60–90 Sek unter der Zunge halten.';
+  } else if(v === '0.03') {
+    el.style.display = 'block';
+    el.innerHTML = '💡 <b>Topisch:</b> Lokale Wirkung ohne systemischen Rausch. CBD und THC wirken entzündungshemmend über periphere CB2-Rezeptoren. Keine psychoaktive Wirkung bei korrekter Anwendung — ausser bei mukosaler Resorption (Schleimhäute).';
+  } else {
+    el.style.display = 'none';
+  }
   calcUpdate();
 };
 
