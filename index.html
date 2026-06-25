@@ -228,11 +228,11 @@ textarea{resize:vertical;min-height:70px}
   <div style="display:flex;gap:6px;align-items:center">
     <button class="btn" id="lang-toggle" onclick="toggleLang()" title="Sprache">DE</button>
     <button class="btn" onclick="showPage('settings')">⚙</button>
+    <button class="btn" id="btn-back-wizard" style="display:none;border-color:var(--amber);color:var(--amber)" onclick="showPage('wizard')">▶ Guide <span id="wizard-indicator" style="display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--amber);margin-left:3px;animation:pulse-warn 1.5s ease-in-out infinite"></span></button>
   </div>
 </div>
 <nav>
   <button class="nb active" onclick="showPage('home')" id="nav-home">⬡ Methoden</button>
-  <button class="nb" onclick="showPage('wizard')" id="nav-wizard">☑ Guide</button>
   <button class="nb" onclick="showPage('library')" id="nav-library">⊞ Bibliothek</button>
   <button class="nb" onclick="showPage('calc')" id="nav-calc">∑ Rechner</button>
   <button class="nb" onclick="showPage('charges')" id="nav-charges">⊡ Chargen</button>
@@ -290,18 +290,18 @@ textarea{resize:vertical;min-height:70px}
 
   <div class="ksec-h" style="margin-bottom:.75rem"><h2>Methoden</h2><span class="meta">16 Guides</span></div>
   <div class="grid">
-    <div class="mc" onclick="showPage('wizard');startWizard('butter')"><div class="ico">🧈</div><span class="lbl">Butter / Fette</span><span class="dsc">Infusion, Dekarb</span><span style="font-size:11px;color:var(--text2);margin-top:6px;display:block">⏱ 8–24h · 🔧 ab 20€</span></div>
-    <div class="mc" onclick="showPage('wizard');startWizard('mct')"><div class="ico">💧</div><span class="lbl">MCT-Öl</span><span class="dsc">Schnell, neutral</span><span style="font-size:11px;color:var(--text2);margin-top:6px;display:block">⏱ 3–4h · 🔧 ab 30€</span></div>
-    <div class="mc" onclick="showPage('wizard');startWizard('glycerin')"><div class="ico">🫙</div><span class="lbl">Glycerin (VG)</span><span class="dsc">Alkoholfrei</span><span style="font-size:11px;color:var(--text2);margin-top:6px;display:block">⏱ 6–10h · 🔧 ab 15€</span></div>
-    <div class="mc" onclick="showPage('wizard');startWizard('lecithin')"><div class="ico">🔬</div><span class="lbl">Lecithin-Ext.</span><span class="dsc">Emulgator-Basis</span><span style="font-size:11px;color:var(--text2);margin-top:6px;display:block">⏱ 1–2h + 24h · 🔧 ab 10€</span></div>
-    <div class="mc" onclick="showPage('wizard');startWizard('tinktur')"><div class="ico">🧪</div><span class="lbl">Tinktur / QWET</span><span class="dsc">Alkohol-Extrakt</span><span style="font-size:11px;color:var(--text2);margin-top:6px;display:block">⏱ 2–4h · 🔧 ab 20€</span></div>
-    <div class="mc" onclick="showPage('wizard');startWizard('feco')"><div class="ico">🟢</div><span class="lbl">FECO</span><span class="dsc">Full Extract Oil</span><span style="font-size:11px;color:var(--text2);margin-top:6px;display:block">⏱ 30–50h · 🔧 ab 30€</span></div>
-    <div class="mc" onclick="showPage('wizard');startWizard('rosin')"><div class="ico">🫧</div><span class="lbl">Rosin / Live Resin</span><span class="dsc">Lösungsmittelfrei</span><span style="font-size:11px;color:var(--text2);margin-top:6px;display:block">⏱ 1–3h · 🔧 ab 350€</span></div>
-    <div class="mc" onclick="showPage('wizard');startWizard('hard_candy')"><div class="ico">💎</div><span class="lbl">Hard Candy</span><span class="dsc">Lollipops, Drops</span><span style="font-size:11px;color:var(--text2);margin-top:6px;display:block">⏱ 1–2h · 🔧 ab 20€</span></div>
-    <div class="mc" onclick="showPage('wizard');startWizard('gummies')"><div class="ico">🐻</div><span class="lbl">Soft Candy</span><span class="dsc">Gummies, Jelly</span><span style="font-size:11px;color:var(--text2);margin-top:6px;display:block">⏱ 4–6h · 🔧 ab 15€</span></div>
-    <div class="mc" onclick="showPage('wizard');startWizard('baked')"><div class="ico">🍪</div><span class="lbl">Backwaren</span><span class="dsc">Brownies, Cookies</span><span style="font-size:11px;color:var(--text2);margin-top:6px;display:block">⏱ 2–3h · 🔧 ab 10€</span></div>
-    <div class="mc" onclick="showPage('wizard');startWizard('kapseln')"><div class="ico">💊</div><span class="lbl">Kapseln</span><span class="dsc">Gelatine, HPMC</span><span style="font-size:11px;color:var(--text2);margin-top:6px;display:block">⏱ 1–2h · 🔧 ab 30€</span></div>
-    <div class="mc" onclick="showPage('wizard');startWizard('exotic')"><div class="ico">✨</div><span class="lbl">Exotisch</span><span class="dsc">Honig, Schokolade</span><span style="font-size:11px;color:var(--text2);margin-top:6px;display:block">⏱ 2–4h · 🔧 ab 20€</span></div>
+    <div class="mc" onclick="startWizard('butter')"><div class="ico">🧈</div><span class="lbl">Butter / Fette</span><span class="dsc">Infusion, Dekarb</span><span style="font-size:11px;color:var(--text2);margin-top:6px;display:block">⏱ 8–24h · 🔧 ab 20€</span></div>
+    <div class="mc" onclick="startWizard('mct')"><div class="ico">💧</div><span class="lbl">MCT-Öl</span><span class="dsc">Schnell, neutral</span><span style="font-size:11px;color:var(--text2);margin-top:6px;display:block">⏱ 3–4h · 🔧 ab 30€</span></div>
+    <div class="mc" onclick="startWizard('glycerin')"><div class="ico">🫙</div><span class="lbl">Glycerin (VG)</span><span class="dsc">Alkoholfrei</span><span style="font-size:11px;color:var(--text2);margin-top:6px;display:block">⏱ 6–10h · 🔧 ab 15€</span></div>
+    <div class="mc" onclick="startWizard('lecithin')"><div class="ico">🔬</div><span class="lbl">Lecithin-Ext.</span><span class="dsc">Emulgator-Basis</span><span style="font-size:11px;color:var(--text2);margin-top:6px;display:block">⏱ 1–2h + 24h · 🔧 ab 10€</span></div>
+    <div class="mc" onclick="startWizard('tinktur')"><div class="ico">🧪</div><span class="lbl">Tinktur / QWET</span><span class="dsc">Alkohol-Extrakt</span><span style="font-size:11px;color:var(--text2);margin-top:6px;display:block">⏱ 2–4h · 🔧 ab 20€</span></div>
+    <div class="mc" onclick="startWizard('feco')"><div class="ico">🟢</div><span class="lbl">FECO</span><span class="dsc">Full Extract Oil</span><span style="font-size:11px;color:var(--text2);margin-top:6px;display:block">⏱ 30–50h · 🔧 ab 30€</span></div>
+    <div class="mc" onclick="startWizard('rosin')"><div class="ico">🫧</div><span class="lbl">Rosin / Live Resin</span><span class="dsc">Lösungsmittelfrei</span><span style="font-size:11px;color:var(--text2);margin-top:6px;display:block">⏱ 1–3h · 🔧 ab 350€</span></div>
+    <div class="mc" onclick="startWizard('hard_candy')"><div class="ico">💎</div><span class="lbl">Hard Candy</span><span class="dsc">Lollipops, Drops</span><span style="font-size:11px;color:var(--text2);margin-top:6px;display:block">⏱ 1–2h · 🔧 ab 20€</span></div>
+    <div class="mc" onclick="startWizard('gummies')"><div class="ico">🐻</div><span class="lbl">Soft Candy</span><span class="dsc">Gummies, Jelly</span><span style="font-size:11px;color:var(--text2);margin-top:6px;display:block">⏱ 4–6h · 🔧 ab 15€</span></div>
+    <div class="mc" onclick="startWizard('baked')"><div class="ico">🍪</div><span class="lbl">Backwaren</span><span class="dsc">Brownies, Cookies</span><span style="font-size:11px;color:var(--text2);margin-top:6px;display:block">⏱ 2–3h · 🔧 ab 10€</span></div>
+    <div class="mc" onclick="startWizard('kapseln')"><div class="ico">💊</div><span class="lbl">Kapseln</span><span class="dsc">Gelatine, HPMC</span><span style="font-size:11px;color:var(--text2);margin-top:6px;display:block">⏱ 1–2h · 🔧 ab 30€</span></div>
+    <div class="mc" onclick="startWizard('exotic')"><div class="ico">✨</div><span class="lbl">Exotisch</span><span class="dsc">Honig, Schokolade</span><span style="font-size:11px;color:var(--text2);margin-top:6px;display:block">⏱ 2–4h · 🔧 ab 20€</span></div>
   </div>
   <div style="display:flex;gap:8px;flex-wrap:wrap">
     <button class="btn primary" onclick="showPage('calc')">∑ Dosierungsrechner</button>
@@ -315,17 +315,20 @@ textarea{resize:vertical;min-height:70px}
     </div>
     <p style="font-size:var(--fs-sm);color:var(--text3);margin-bottom:.875rem;line-height:1.6">Gefährliche Lösungsmittel oder Druckgeräte — für Heimanwender in der Regel nicht empfohlen.</p>
     <div class="grid" style="grid-template-columns:repeat(auto-fill,minmax(150px,1fr))">
-      <div class="mc adv" onclick="showPage('wizard');startWizard('rso')"><div class="ico">🟤</div><span class="lbl">RSO</span><span class="dsc">Naphtha / Ethanol</span><span style="font-size:11px;color:var(--warn);margin-top:6px;display:block">⏱ 5–8h · 🔧 ab 50€</span></div>
-      <div class="mc adv" onclick="showPage('wizard');startWizard('bho')"><div class="ico">🔥</div><span class="lbl">BHO / N-Butan</span><span class="dsc">Closed Loop</span><span style="font-size:11px;color:var(--warn);margin-top:6px;display:block">⏱ 2–4h + 24–72h · 🔧 ab 800€</span></div>
-      <div class="mc adv" onclick="showPage('wizard');startWizard('thca')"><div class="ico">💎</div><span class="lbl">THCA-Kristalle</span><span class="dsc">Diamond · Press · Zentrifuge</span><span style="font-size:11px;color:var(--warn);margin-top:6px;display:block">⏱ 1–3 Wochen · 🔧 ab 400€</span></div>
-      <div class="mc adv" onclick="showPage('wizard');startWizard('vakuum')"><div class="ico">⚗</div><span class="lbl">Vakuumdestillation</span><span class="dsc">Lösungsmittelrückgewinnung · FECO</span><span style="font-size:11px;color:var(--warn);margin-top:6px;display:block">⏱ 3–6h · 🔧 ab 1500€</span></div>
+      <div class="mc adv" onclick="startWizard('rso')"><div class="ico">🟤</div><span class="lbl">RSO</span><span class="dsc">Naphtha / Ethanol</span><span style="font-size:11px;color:var(--warn);margin-top:6px;display:block">⏱ 5–8h · 🔧 ab 50€</span></div>
+      <div class="mc adv" onclick="startWizard('bho')"><div class="ico">🔥</div><span class="lbl">BHO / N-Butan</span><span class="dsc">Closed Loop</span><span style="font-size:11px;color:var(--warn);margin-top:6px;display:block">⏱ 2–4h + 24–72h · 🔧 ab 800€</span></div>
+      <div class="mc adv" onclick="startWizard('thca')"><div class="ico">💎</div><span class="lbl">THCA-Kristalle</span><span class="dsc">Diamond · Press · Zentrifuge</span><span style="font-size:11px;color:var(--warn);margin-top:6px;display:block">⏱ 1–3 Wochen · 🔧 ab 400€</span></div>
+      <div class="mc adv" onclick="startWizard('vakuum')"><div class="ico">⚗</div><span class="lbl">Vakuumdestillation</span><span class="dsc">Lösungsmittelrückgewinnung · FECO</span><span style="font-size:11px;color:var(--warn);margin-top:6px;display:block">⏱ 3–6h · 🔧 ab 1500€</span></div>
     </div>
   </div>
 </div>
 
 <!-- WIZARD -->
 <div id="page-wizard" class="page">
-  <button class="btn-back" onclick="showPage('home');stopAllTimers()">← Zurück</button>
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.875rem">
+  <button class="btn-back" onclick="showPage('home')">← Zurück</button>
+  <button class="btn danger" onclick="closeWizard()" title="Guide beenden und zurücksetzen">✕ Guide schliessen</button>
+</div>
   <div class="wiz-title" id="wiz-title"></div>
   <div class="wiz-sub" id="wiz-sub"></div>
   <div class="progress"><div class="pbar" id="pbar" style="width:0%"></div></div>
@@ -954,16 +957,27 @@ window.showPage = function(p) {
   if(p==='calc') { renderTerpeneGrid(); calcUpdate(); }
   if(p==='charges') renderCharges();
   if(p==='safety') renderSafety();
+  if(p==='wizard') renderWizSteps();
+  var bw2 = document.getElementById('btn-back-wizard');
+  if(bw2) bw2.style.display = (curWizMedia && p!=='wizard') ? 'inline-flex' : 'none';
 };
 
-// ── WIZARD ────────────────────────────────────────────────────────────────
 window.startWizard = function(m) {
-  curWizMedia = m; stepChecked = {}; stepNotes = {};
-  stopAllTimers(); stepTimers = {};
+  var isNew = (m !== curWizMedia);
+  curWizMedia = m;
+  if(isNew) { stepChecked = {}; stepNotes = {}; stopAllTimers(); stepTimers = {}; }
   document.getElementById('charge-save-panel').style.display = 'none';
   document.getElementById('wiz-title').textContent = W[m].title;
   document.getElementById('wiz-sub').textContent = 'Schritte abhaken — Timer & Notizen pro Schritt';
+  showPage('wizard');
   renderWizSteps();
+};
+window.closeWizard = function() {
+  curWizMedia = null; stepChecked = {}; stepNotes = {};
+  stopAllTimers(); stepTimers = {};
+  var bw2 = document.getElementById('btn-back-wizard');
+  if(bw2) bw2.style.display = 'none';
+  showPage('home');
 };
 
 window.renderWizSteps = function() {
