@@ -542,10 +542,10 @@ textarea{resize:vertical;min-height:70px}
     ⏱ <b>Onset:</b> 30–90 Sek. — warten und einschätzen bevor nachgelegt wird.
   </div>
   <div id="inhale-compare-info" style="display:none;background:var(--accent-bg);border:1px solid var(--accent);border-radius:var(--radius);padding:10px 12px;font-size:var(--fs-sm);color:#7ec8a0;line-height:1.75;margin-top:8px">
-    🔬 <b>Warum inhalativ ≠ oral:</b><br>
-    Bei <b>Inhalation</b> gelangt Delta-9-THC direkt ins Blut — Onset 30–90 Sek, Peak nach 10–30 Min, Dauer 1–3h. Bioverfügbarkeit: Joint ~25%, Vaporizer ~72–80%.<br><br>
-    Bei <b>Edibles</b> durchläuft THC den First-Pass-Effekt der Leber und wird zu <b>11-Hydroxy-THC (11-OH-THC)</b> umgewandelt — 4–5× potenter, überquert die Blut-Hirn-Schranke effizienter. Onset 30–120 Min, Dauer 4–8h.<br><br>
-    👉 <b>Gleiche mg-Zahl oral ≠ inhalativ.</b> 5mg THC inhaliert wirkt anders als 5mg in einem Edible — oral intensiver und länger, inhalativ schneller und kontrollierbarer.<br>
+    ⚖️ <b>Inhalativ ≠ oral — gleiche mg, andere Wirkung:</b><br>
+    <b>Inhalation:</b> Delta-9-THC gelangt direkt ins Blut. Onset 30–90 Sek, Dauer 1–3h — schnell und einschätzbar.<br><br>
+    <b>Edibles:</b> THC wird in der Leber zu <b>11-Hydroxy-THC</b> — wirkt stärker und bis zu 8h. Deshalb fühlen sich 10mg oral intensiver an als 10mg inhaliert.<br><br>
+    👉 Wer beides kennt: Edible-Dosen immer tiefer ansetzen als gewohnt.<br>
     <span style="font-size:var(--fs-xs);color:var(--text3)">Quellen: MacCallum &amp; Russo (2018), Huestis (2007)</span>
   </div>
 
@@ -1269,10 +1269,10 @@ window.onBioChange = function() {
   if(!el) { calcUpdate(); return; }
   if(v === '0.13') {
     el.style.display = 'block';
-    el.innerHTML = '💡 <b>Oral / Edibles:</b> THC wird in der Leber zu 11-Hydroxy-THC (11-OH-THC) umgewandelt — <b>4–5× potenter</b> als Delta-9-THC, überquert die Blut-Hirn-Schranke effizienter. Selbst 6–20% Bioverfügbarkeit kann intensive Wirkung entfalten. Onset: 30–120 Min — <b>niemals nachlegen!</b>';
+    el.innerHTML = '⚠️ <b>Oral / Edibles:</b> Die mg-Zahl hier ist nicht gleich wie beim Rauchen. THC wird in der Leber zu <b>11-Hydroxy-THC</b> umgewandelt — wirkt stärker und länger als inhaliertes THC. Wirkungseintritt: <b>30–120 Min</b>. Nichts nachnehmen bevor die Wirkung spürbar ist.';
   } else if(v === '0.275') {
     el.style.display = 'block';
-    el.innerHTML = '💡 <b>Sublingual:</b> THC wird direkt über die Mundschleimhaut resorbiert und umgeht den First-Pass-Effekt der Leber. Kein 11-OH-THC — die Wirkung ist direkter und vorhersehbarer als Edibles. Onset: 15–45 Min. Lösung mind. 60–90 Sek unter der Zunge halten.';
+    el.innerHTML = '💡 <b>Sublingual:</b> Wirkung setzt schneller ein als bei Edibles — kein Umweg über die Leber. Die mg-Zahl ist direkter vergleichbar mit Inhalation. Onset: <b>15–45 Min</b>. Lösung mindestens 60–90 Sek unter der Zunge halten.';
   } else if(v === '0.03') {
     el.style.display = 'block';
     el.innerHTML = '💡 <b>Topisch:</b> Lokale Wirkung ohne systemischen Rausch. CBD und THC wirken entzündungshemmend über periphere CB2-Rezeptoren. Keine psychoaktive Wirkung bei korrekter Anwendung — ausser bei mukosaler Resorption (Schleimhäute).';
