@@ -1,5 +1,7 @@
 <!DOCTYPE html>
 <html lang="de">
+<!-- CannGuide © 2024-2026 quack-tic
+     Licensed under GNU GPL v3 — https://github.com/quack-tic/CannGuide -->
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
@@ -1698,7 +1700,9 @@ window.doExportPDF = function() {
     }
     body += '</div>';
   });
-  var html = '<!DOCTYPE html><html lang="de"><head><meta charset="UTF-8"><title>CannGuide</title><style>'+css+'@keyframes pulse-warn{0%,100%{box-shadow:0 0 0 0 rgba(224,82,82,0.4)}50%{box-shadow:0 0 0 6px rgba(224,82,82,0)}}.pulse-warn{animation:pulse-warn 1.5s ease-in-out infinite;border-color:#e05252!important;}</style></head><body><h1>🌿 CannGuide — Chargenübersicht</h1><div class="sub">Exportiert am '+ds+' um '+ts+' · '+charges.length+' Charge(n)</div>'+body+'<div class="footer">CannGuide · quack-tic.github.io/cannguide</div></body></html>';
+  var html = '<!DOCTYPE html><html lang="de">
+<!-- CannGuide © 2024-2026 quack-tic
+     Licensed under GNU GPL v3 — https://github.com/quack-tic/CannGuide --><head><meta charset="UTF-8"><title>CannGuide</title><style>'+css+'@keyframes pulse-warn{0%,100%{box-shadow:0 0 0 0 rgba(224,82,82,0.4)}50%{box-shadow:0 0 0 6px rgba(224,82,82,0)}}.pulse-warn{animation:pulse-warn 1.5s ease-in-out infinite;border-color:#e05252!important;}</style></head><body><h1>🌿 CannGuide — Chargenübersicht</h1><div class="sub">Exportiert am '+ds+' um '+ts+' · '+charges.length+' Charge(n)</div>'+body+'<div class="footer">CannGuide · quack-tic.github.io/cannguide</div></body></html>';
   var win = window.open('','_blank');
   if(!win) { alert('Popup blockiert. Bitte Popups erlauben.'); return; }
   win.document.write(html); win.document.close();
