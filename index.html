@@ -11,8 +11,8 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="cannguide">
 <meta name="description" content="cannguide — Prozess-Guide, Dosierungsrechner & Chargenverwaltung für Cannabis-Edibles. DACH-Raum.">
-<link rel="manifest" href="/cannguide/manifest.json">
-<link rel="apple-touch-icon" href="/cannguide/icon-192.jpg">
+<link rel="manifest" href="./manifest.json">
+<link rel="apple-touch-icon" href="./icon192.jpg">
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' rx='112' fill='%230F172A'/%3E%3Cpolygon points='256,70 395,150 395,310 256,390 117,310 117,150' fill='none' stroke='%2338BDF8' stroke-width='28' stroke-linejoin='round'/%3E%3Ccircle cx='256' cy='70' r='20' fill='%2300F2FE'/%3E%3Cpath d='M256,160 Q286,230 256,300 Q226,230 256,160 Z' fill='%2334D399'/%3E%3Cpath d='M256,230 Q206,210 186,270 Q236,290 256,230 Z' fill='%23059669'/%3E%3Cpath d='M256,230 Q306,210 326,270 Q276,290 256,230 Z' fill='%23059669'/%3E%3Cline x1='256' y1='390' x2='256' y2='440' stroke='%2338BDF8' stroke-width='28' stroke-linecap='round'/%3E%3C/svg%3E">
 <title>cannguide</title>
 <style>
@@ -1700,9 +1700,7 @@ window.doExportPDF = function() {
     }
     body += '</div>';
   });
-  var html = '<!DOCTYPE html><html lang="de">
-<!-- CannGuide © 2024-2026 quack-tic
-     Licensed under GNU GPL v3 — https://github.com/quack-tic/CannGuide --><head><meta charset="UTF-8"><title>CannGuide</title><style>'+css+'@keyframes pulse-warn{0%,100%{box-shadow:0 0 0 0 rgba(224,82,82,0.4)}50%{box-shadow:0 0 0 6px rgba(224,82,82,0)}}.pulse-warn{animation:pulse-warn 1.5s ease-in-out infinite;border-color:#e05252!important;}</style></head><body><h1>🌿 CannGuide — Chargenübersicht</h1><div class="sub">Exportiert am '+ds+' um '+ts+' · '+charges.length+' Charge(n)</div>'+body+'<div class="footer">CannGuide · quack-tic.github.io/cannguide</div></body></html>';
+  var html = '<!DOCTYPE html><html lang="de"><head><meta charset="UTF-8"><title>CannGuide</title><style>'+css+'@keyframes pulse-warn{0%,100%{box-shadow:0 0 0 0 rgba(224,82,82,0.4)}50%{box-shadow:0 0 0 6px rgba(224,82,82,0)}}.pulse-warn{animation:pulse-warn 1.5s ease-in-out infinite;border-color:#e05252!important;}</style></head><body><h1>🌿 CannGuide — Chargenübersicht</h1><div class="sub">Exportiert am '+ds+' um '+ts+' · '+charges.length+' Charge(n)</div>'+body+'<div class="footer">CannGuide · quack-tic.github.io/cannguide</div></body></html>';
   var win = window.open('','_blank');
   if(!win) { alert('Popup blockiert. Bitte Popups erlauben.'); return; }
   win.document.write(html); win.document.close();
@@ -1979,7 +1977,7 @@ function esc(s){ if(!s) return ''; return String(s).replace(/&/g,'&amp;').replac
     var host=window.location.hostname;
     if(host.indexOf('claudeusercontent.com')===-1 && host!=='localhost' && host!=='127.0.0.1' && host!==''){
       window.addEventListener('load',function(){
-        navigator.serviceWorker.register('/cannguide/service-worker.js')
+        navigator.serviceWorker.register('./serviceworker.js')
           .then(function(r){console.log('SW:',r.scope);})
           .catch(function(e){console.warn('SW:',e);});
       });
